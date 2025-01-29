@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
-id: intro
-title: Documentation
-sidebar_label: Introduction
+id: technical-overview
+title: Technical Documentation
+sidebar_label: Technical Overview
 ---
 
 # Overview
@@ -89,7 +89,3 @@ The documentation and core components are open source:
 - Reference implementations
 - Adaptable codebase
 - Community-driven improvements
-
-## Contact
-
-For more information, contact us at [contact@numen.games](mailto:contact@numen.games).
