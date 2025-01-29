@@ -19,7 +19,7 @@ Our Hyperfy 2 infrastructure implementation focuses on providing a scalable and 
 ## Key Components
 
 ### Service Architecture
-We use containerized services running on AWS ECS, with each service managing multiple processes through PM2. For detailed architecture diagrams and specifications, see our [Architecture Guide](/docs/hyperfy-2/infrastructure/architecture).
+We use containerized services running on AWS ECS, with each service managing multiple processes through PM2. For detailed architecture diagrams and specifications, see our [Architecture Guide](/docs/organization/technology/hyperfy-2/infrastructure/architecture).
 
 ### Resource Management
 Our infrastructure utilizes shared resources including:
@@ -28,22 +28,22 @@ Our infrastructure utilizes shared resources including:
 - Service discovery
 - Configuration management
 
-Learn more in our [Resource Management Guide](/docs/hyperfy-2/infrastructure/resources).
+Learn more in our [Resource Management Guide](/docs/organization/technology/hyperfy-2/infrastructure/resources).
 
 ### Deployment Strategy
-Services are deployed through an automated pipeline, from GitHub to production. For implementation details, check our [Deployment Guide](/docs/hyperfy-2/infrastructure/deployment).
+Services are deployed through an automated pipeline, from GitHub to production. For implementation details, check our [Deployment Guide](/docs/organization/technology/hyperfy-2/infrastructure/deployment).
 
 ## Documentation Structure
 
-- **[AWS Setup](/docs/hyperfy-2/infrastructure/aws-setup)**: Initial cloud infrastructure setup
-- **[Architecture](/docs/hyperfy-2/infrastructure/architecture)**: Detailed system design and diagrams
-- **[Terraform Modules](/docs/hyperfy-2/infrastructure/terraform-modules)**: Infrastructure as Code implementation
-- **[Deployment](/docs/hyperfy-2/infrastructure/deployment)**: Service deployment process
-- **[Resources](/docs/hyperfy-2/infrastructure/resources)**: Shared resource management
-- **[Monitoring](/docs/hyperfy-2/infrastructure/monitoring)**: System monitoring and logging
+- **[AWS Setup](/docs/organization/technology/hyperfy-2/infrastructure/aws-setup)**: Initial cloud infrastructure setup
+- **[Architecture](/docs/organization/technology/hyperfy-2/infrastructure/architecture)**: Detailed system design and diagrams
+- **[Terraform Modules](/docs/organization/technology/hyperfy-2/infrastructure/terraform-modules)**: Infrastructure as Code implementation
+- **[Deployment](/docs/organization/technology/hyperfy-2/infrastructure/deployment)**: Service deployment process
+- **[Resources](/docs/organization/technology/hyperfy-2/infrastructure/resources)**: Shared resource management
+- **[Monitoring](/docs/organization/technology/hyperfy-2/infrastructure/monitoring)**: System monitoring and logging
 
 ## Getting Started
 
-1. Review the [Architecture Guide](/docs/hyperfy-2/infrastructure/architecture) for system understanding
-2. Follow the [AWS Setup Guide](/docs/hyperfy-2/infrastructure/aws-setup) for initial configuration
-3. Use the [Deployment Guide](/docs/hyperfy-2/infrastructure/deployment) for service implementation
+1. Review the [Architecture Guide](/docs/organization/technology/hyperfy-2/infrastructure/architecture) for system understanding
+2. Follow the [AWS Setup Guide](/docs/organization/technology/hyperfy-2/infrastructure/aws-setup) for initial configuration
+3. Use the [Deployment Guide](/docs/organization/technology/hyperfy-2/infrastructure/deployment) for service implementation

@@ -10,7 +10,7 @@ This section covers our work and contributions within the Hyperfy 2 ecosystem, o
 
 ## Infrastructure
 
-Our cloud architecture and deployment solutions focus on scalability and reliability, designed to be cloud-provider agnostic. Learn more in the [infrastructure section](/docs/hyperfy-2/infrastructure/overview).
+Our cloud architecture and deployment solutions focus on scalability and reliability, designed to be cloud-provider agnostic. Learn more in the [infrastructure section](/docs/organization/technology/hyperfy-2/infrastructure/overview).
 
 Key aspects include:
 - Cloud infrastructure management
@@ -22,7 +22,7 @@ While our current implementation uses AWS services, the architecture is designed
 
 ## Components
 
-Our component development extends Hyperfy 2 capabilities. Explore our [components documentation](/docs/hyperfy-2/components/overview) for:
+Our component development extends Hyperfy 2 capabilities. Explore our [components documentation](/docs/organization/technology/hyperfy-2/components/overview) for:
 - Custom component development
 - Integration patterns and best practices
 
