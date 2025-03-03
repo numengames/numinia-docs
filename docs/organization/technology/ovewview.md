@@ -5,87 +5,58 @@ title: Technical Documentation
 sidebar_label: Technical Overview
 ---
 
-# Overview
+# Technical Overview
 
-A comprehensive suite of tools and technologies for creating immersive digital spaces. Our ecosystem leverages emerging technologies to build interactive environments focused on learning, collaboration, and experimentation. With more than 50 active spaces deployed and maintained, we develop robust frameworks and methodologies for creating engaging digital experiences.
+Numinia's technical infrastructure is built on open-source technologies, focusing on scalability, maintainability, and accessibility. Our architecture combines modern web technologies with cloud-native solutions to deliver immersive, gamified experiences.
+
+## Core Platform
+
+Our platform integrates three fundamental technologies: web-based 3D rendering through Three.js and WebGL for cross-platform compatibility, cloud infrastructure leveraging Kubernetes on AWS for deployment, and AI-powered digital agents for automation and assistance.
 
 ## Technology Stack
 
-### Core Technologies
+### Frontend Technologies
 
-- **Three.js-based Engines**: We work with various Three.js-based engines to create high-performance 3D environments
-- **Supported Platforms**:
-  - **Hyperfy 2**: A powerful platform for creating immersive spaces, where we actively contribute with cloud architecture and specific components
-  - **Oncyber**: An alternative platform for creating inmersive spaces
-  - **Substrata**: A high-performance engine for specific applications close to the hardware
+At the core of our frontend lies a Three.js-based engine implementation that powers our 3D experiences. We currently support multiple platforms, with Hyperfy 2 serving as our primary development environment. We're also preparing for integration with Oncyber once it becomes open source, and planning future support for Substrata.
 
-### Development Infrastructure
+### Backend Infrastructure
 
-The codebase includes integrations and components for:
+Our infrastructure follows Infrastructure as Code principles using Terragrunt built on top of the Terraform framework. This approach enables modular, version-controlled infrastructure management with reusable components across our platform.
 
-- **Core APIs**: Backend services for platform interactions, digital agents, and real-time communication
-- **Integration Layer**: Comprehensive connectors for Discord, social platforms, and third-party services
-- **Smart Contracts**: Web3 integration for digital asset management and ownership
-- **Digital Agents**: AI-powered solutions for interactive experiences and automation
-- **3D Components**: Library of reusable elements for the platforms we support
+The cloud architecture centers around Kubernetes for container orchestration, deeply integrated with AWS services. This foundation supports our microservices architecture, ensuring scalability and maintainability.
 
-## Project Structure
+Our core services run on Node.js (22.x+), utilizing MongoDB for data persistence and incorporating real-time communication capabilities throughout the platform.
 
-The documentation is organized into key sections:
+## System Components
 
-### [Hyperfy 2](/docs/organization/technology/hyperfy-2/overview)
-Our main focus for spatial development, including:
-- [Infrastructure](/docs/organization/technology/hyperfy-2/infrastructure/overview): Cloud architecture, deployment guides, and AWS setup
-- [Components](/docs/organization/technology/hyperfy-2/components/overview): Core and custom component development
-- Best practices and implementation patterns
+Our platform integrates several core features including backend APIs, digital agent systems, a comprehensive gamification engine, and robust analytics capabilities. These components work together to create engaging, interactive experiences while maintaining performance and reliability.
 
-<!-- ### [ai16z](/docs/ai16z/overview)
-Integration of AI capabilities:
-- System architecture and design patterns
-- Platform integrations with Discord, Hyperfy, and Oncyber
-- Deployment strategies and best practices -->
+## Documentation Structure
 
-For detailed implementation guides, refer to the specific sections above.
+Our documentation is organized into three main areas:
 
-## Getting Started
+### Platforms
 
-### Prerequisites
+Our [Platform Overview][platforms] covers implementation details for each supported engine. The [Hyperfy 2 documentation][hyperfy2] includes components, features, and best practices. Documentation for Oncyber and Substrata will be available as these platforms are integrated.
 
-- Node.js (22.x or higher)
-- Git
-- Working knowledge of:
-  - TypeScript
-  - Three.js
-  - Web3 technologies
+### Infrastructure
 
-### Quick Start
+The [Infrastructure Guide][infrastructure] covers our Kubernetes setup, AWS architecture, and monitoring systems.
 
-1. Repository setup
-2. Dependencies installation
-3. Platform-specific configuration
+### Development
+
+Our [Development Guide][development] provides comprehensive information about our APIs, integration procedures, and deployment processes.
 
 ## Contributing
 
-Contribution areas:
-- Component development
-- Documentation improvements
-- Issue reporting
-- Feature suggestions
+Our [Contributing Guide][contributing] provides detailed information about development guidelines, documentation standards, security considerations, and best practices for contributing to the platform.
 
-See contribution guidelines in each repository for specific details.
+## Support
 
-## Implementation Overview
+For technical support and inquiries, contact us at [tech@numengames.com](mailto:tech@numengames.com).
 
-Current deployment stats:
-- 50+ production spaces
-- Multiple client implementations
-- Experimental environments
-
-Each space demonstrates different aspects of the platform's capabilities, from educational environments to collaborative workspaces.
-
-## License and Usage
-
-The documentation and core components are open source:
-- Reference implementations
-- Adaptable codebase
-- Community-driven improvements
+[platforms]: /docs/organization/technology/platforms/platforms-overview
+[hyperfy2]: /docs/organization/technology/platforms/hyperfy2/overview
+[infrastructure]: /docs/organization/technology/infrastructure/overview
+[development]: /docs/organization/technology/development/overview
+[contributing]: /docs/organization/contributing

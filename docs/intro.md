@@ -16,8 +16,8 @@ A comprehensive suite of tools and technologies for creating immersive digital s
 - **Three.js-based Engines**: We work with various Three.js-based engines to create high-performance 3D environments
 - **Supported Platforms**:
   - **Hyperfy 2**: A powerful platform for creating immersive spaces, where we actively contribute with cloud architecture and specific components
-  - **Oncyber**: An alternative platform for creating inmersive spaces
-  - **Substrata**: A high-performance engine for specific applications close to the hardware
+  - **Oncyber** _(Pending Open Source)_: An alternative platform for creating immersive spaces, implementation ready once the platform becomes open source
+  - **Substrata** _(Planned)_: A high-performance engine for specific applications close to the hardware, planned for future integration
 
 ### Development Infrastructure
 
