@@ -33,10 +33,10 @@ The codebase includes integrations and components for:
 
 The documentation is organized into key sections:
 
-### [Hyperfy 2](/docs/organization/technology/hyperfy-2/overview)
+### [Hyperfy 2](/docs/organization/technology/platforms/hyperfy)
 Our main focus for spatial development, including:
-- [Infrastructure](/docs/organization/technology/hyperfy-2/infrastructure/overview): Cloud architecture, deployment guides, and AWS setup
-- [Components](/docs/organization/technology/hyperfy-2/components/overview): Core and custom component development
+- [Infrastructure](/docs/organization/technology/infrastructure/infrastructure-overview): Cloud architecture, deployment guides, and AWS setup
+- Components: Core and custom component development
 - Best practices and implementation patterns
 
 <!-- ### [ai16z](/docs/ai16z/overview)
