@@ -7,56 +7,83 @@ sidebar_label: Technical Overview
 
 # Technical Overview
 
-Numinia's technical infrastructure is built on open-source technologies, focusing on scalability, maintainability, and accessibility. Our architecture combines modern web technologies with cloud-native solutions to deliver immersive, gamified experiences.
+Numinia is a comprehensive technology platform that combines artificial intelligence, digital agents, and immersive 3D environments to create powerful interactive experiences. Our architecture integrates multiple cutting-edge technologies to deliver intelligent, scalable, and engaging solutions.
 
-## Core Platform
+## Current Implementation
 
-Our platform integrates three fundamental technologies: web-based 3D rendering through Three.js and WebGL for cross-platform compatibility, cloud infrastructure leveraging Kubernetes on AWS for deployment, and AI-powered digital agents for automation and assistance.
+Our current infrastructure and platform capabilities include:
 
-## Technology Stack
+### Cloud Infrastructure
+- **Infrastructure as Code**: Production-ready Terragrunt implementation on AWS
+- **Container Orchestration**: Kubernetes cluster management with EKS
+- **Monitoring**: Prometheus metrics for Kubernetes and CloudWatch for AWS services
+- **Security**: Multi-layer security with VPC, IAM, and RBAC configurations
 
-### Frontend Technologies
+### Platform Integration
+- **Hyperfy Integration**: Complete integration with production-ready deployment
+- **3D Rendering**: Three.js and WebGL implementation for cross-platform compatibility
+- **Real-time Communication**: WebSocket implementation for live interactions
+- **Asset Delivery**: Optimized content delivery system
 
-At the core of our frontend lies a Three.js-based engine implementation that powers our 3D experiences. We currently support multiple platforms, with Hyperfy 2 serving as our primary development environment. We're also preparing for integration with Oncyber once it becomes open source, and planning future support for Substrata.
+### Core Services
+- **Backend APIs**: Node.js (22.x+) microservices
+- **Data Management**: MongoDB for persistent storage
+- **Authentication**: Secure user and service authentication
+- **Monitoring**: Service health and performance tracking
 
-### Backend Infrastructure
+## Future Roadmap
 
-Our infrastructure follows Infrastructure as Code principles using Terragrunt built on top of the Terraform framework. This approach enables modular, version-controlled infrastructure management with reusable components across our platform.
+Our planned expansions and features include:
 
-The cloud architecture centers around Kubernetes for container orchestration, deeply integrated with AWS services. This foundation supports our microservices architecture, ensuring scalability and maintainability.
+### Digital Agents & AI
+- **Intelligent Digital Agents**: AI-powered entities for natural interaction
+- **Natural Language Processing**: Advanced language understanding capabilities
+- **Knowledge Management**: Information processing and retrieval systems
+- **Adaptive Learning**: User interaction-based learning systems
 
-Our core services run on Node.js (22.x+), utilizing MongoDB for data persistence and incorporating real-time communication capabilities throughout the platform.
+### Web3 & Digital Assets
+- **Digital Asset Ownership**: Smart contract-based ownership system
+- **NFT Integration**: Creation and management of digital assets
+- **Multi-chain Support**: Integration with various blockchain networks
+- **Wallet Integration**: Web3 wallet connectivity
 
-## System Components
-
-Our platform integrates several core features including backend APIs, digital agent systems, a comprehensive gamification engine, and robust analytics capabilities. These components work together to create engaging, interactive experiences while maintaining performance and reliability.
+### Advanced Platform Features
+- **Gamification Engine**: Engagement and interaction systems
+- **Advanced Analytics**: Comprehensive user behavior tracking
+- **Integration Layer**: Discord and social platform connectors
+- **Spatial Computing**: Advanced 3D interaction systems
 
 ## Documentation Structure
 
-Our documentation is organized into three main areas:
-
-### Platforms
-
-Our [Platform Overview][platforms] covers implementation details for each supported engine. The [Hyperfy 2 documentation][hyperfy2] includes components, features, and best practices. Documentation for Oncyber and Substrata will be available as these platforms are integrated.
+Our documentation currently covers two main implemented areas:
 
 ### Infrastructure
 
-The [Infrastructure Guide][infrastructure] covers our Kubernetes setup, AWS architecture, and monitoring systems.
+The [Infrastructure Guide][infrastructure] covers our production-ready cloud setup:
+- Cloud architecture and AWS implementation
+- Kubernetes configuration
+- Monitoring systems
+- Security protocols
 
-### Development
+### Platforms & 3D
 
-Our [Development Guide][development] provides comprehensive information about our APIs, integration procedures, and deployment processes.
+The [Platform Overview][platforms] details our spatial computing capabilities:
+- Hyperfy integration and deployment
+- Component development
+- 3D rendering and optimization
+- Real-time communication
 
-## Contributing
+### Future Documentation
 
-Our [Contributing Guide][contributing] provides detailed information about development guidelines, documentation standards, security considerations, and best practices for contributing to the platform.
+As we implement new features outlined in our roadmap, we will expand our documentation to include:
+
+- **AI & Digital Agents**: Documentation for our agent architecture and AI systems
+- **Web3 & Digital Assets**: Guidelines for blockchain integration and digital asset management
 
 ## Support
 
 For technical support and inquiries, contact us at [tech@numengames.com](mailto:tech@numengames.com).
 
 [platforms]: /docs/organization/technology/platforms/platforms-overview
-[hyperfy2]: /docs/organization/technology/platforms/hyperfy2/overview
-[infrastructure]: /docs/organization/technology/infrastructure/overview
-[development]: /docs/organization/technology/development/overview
-[contributing]: /docs/organization/contributing
+[hyperfy]: /docs/organization/technology/platforms/hyperfy/overview
+[infrastructure]: /docs/organization/technology/infrastructure/infrastructure-overview
