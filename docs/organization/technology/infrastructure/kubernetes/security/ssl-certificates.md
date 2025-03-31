@@ -1,11 +1,11 @@
 ---
-sidebar_position: 4
-id: cert-manager
+sidebar_position: 1
+id: ssl-certificates
 title: SSL Certificate Management
 sidebar_label: SSL Certificates
 ---
 
-# SSL Certificate Management
+# Managing SSL Certificates
 
 This guide is specifically for teams and projects that are using Numinia's infrastructure as their hosting provider. If you're already running your application on our infrastructure, we provide automatic SSL certificates to keep your websites secure.
 

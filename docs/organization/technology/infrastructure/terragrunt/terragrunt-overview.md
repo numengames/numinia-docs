@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
-id: terragrunt
-title: Terragrunt Implementation
-sidebar_label: Terragrunt
+sidebar_position: 1
+id: terragrunt-overview
+title: Terragrunt Architecture Overview
+sidebar_label: Terragrunt Overview
 ---
 
 # Terragrunt Implementation
@@ -38,11 +38,11 @@ The `root.hcl` file serves as the foundation of our Terragrunt configuration, de
 remote_state {
   backend = "s3"
   config = {
-    bucket         = "numinia-terraform-state"
+    bucket         = "<terraform-state-bucket-name>"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "eu-west-1"
     encrypt        = true
-    dynamodb_table = "terraform-locks"
+    dynamodb_table = "<terraform-locks-table>"
   }
 }
 
@@ -63,7 +63,7 @@ This configuration establishes our state management strategy, utilizing S3 for c
 Our environment-specific configurations are managed through environment variables:
 
 ```shell
-AWS_PROFILE=numinia-prod
+AWS_PROFILE=<your-aws-profile>
 AWS_REGION=eu-west-1
 ENVIRONMENT=production
 ```
@@ -86,7 +86,7 @@ terraform {
 }
 
 inputs = {
-  name = "numinia-vpc"
+  name = "<vpc-name>"
   cidr = "10.0.0.0/16"
   
   azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
@@ -100,7 +100,7 @@ inputs = {
   
   tags = {
     Environment = "production"
-    Project     = "numinia"
+    Project     = "<project-name>"
   }
 }
 ```
@@ -123,7 +123,7 @@ dependency "vpc" {
 }
 
 inputs = {
-  cluster_name    = "numinia-cluster"
+  cluster_name    = "<cluster-name>"
   cluster_version = "1.27"
   
   vpc_id     = dependency.vpc.outputs.vpc_id
@@ -160,7 +160,7 @@ dependency "vpc" {
 }
 
 inputs = {
-  name = "numinia-efs"
+  name = "<efs-name>"
   
   vpc_id          = dependency.vpc.outputs.vpc_id
   subnet_ids      = dependency.vpc.outputs.private_subnets
@@ -193,13 +193,13 @@ Our deployment process follows a standardized workflow to ensure consistency and
 
 2. AWS authentication:
    ```bash
-   export AWS_PROFILE=numinia-prod
+   export AWS_PROFILE=<your-aws-profile>
    aws sts get-caller-identity
    ```
 
 3. Infrastructure deployment:
    ```bash
-   cd infrastructure/production/eu-west-1/numinia
+   cd infrastructure/production/eu-west-1/<your-organization>
    terragrunt run-all plan    # Review changes
    terragrunt run-all apply   # Apply changes
    ```

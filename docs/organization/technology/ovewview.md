@@ -84,6 +84,6 @@ As we implement new features outlined in our roadmap, we will expand our documen
 
 For technical support and inquiries, contact us at [tech@numengames.com](mailto:tech@numengames.com).
 
-[platforms]: /docs/organization/technology/platforms/platforms-overview
-[hyperfy]: /docs/organization/technology/platforms/hyperfy/overview
-[infrastructure]: /docs/organization/technology/infrastructure/infrastructure-overview
+[platforms]: /docs/organization/technology/platforms
+[hyperfy]: /docs/organization/technology/platforms/hyperfy/hyperfy-integration
+[infrastructure]: /docs/organization/technology/infrastructure

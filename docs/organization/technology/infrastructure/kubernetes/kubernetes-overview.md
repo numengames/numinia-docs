@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
-id: kubernetes
-title: Kubernetes Implementation
-sidebar_label: Kubernetes
+sidebar_position: 1
+id: kubernetes-overview
+title: Kubernetes Architecture Overview
+sidebar_label: Kubernetes Overview
 ---
 
 # Kubernetes Configuration

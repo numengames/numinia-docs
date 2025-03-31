@@ -1,11 +1,11 @@
 ---
-sidebar_position: 5
-id: creating-a-new-organization
+sidebar_position: 2
+id: creating-organization
 title: Creating a New Organization
-sidebar_label: Creating a New Organization
+sidebar_label: Creating Organization
 ---
 
-# Creating a New Organization
+# Deploying a New Organization
 
 This guide details the process of setting up a new organization within our infrastructure. Each organization is isolated within our Kubernetes cluster while sharing the core infrastructure components.
 
