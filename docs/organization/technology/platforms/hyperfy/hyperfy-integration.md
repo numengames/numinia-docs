@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
-id: hyperfy
-title: Hyperfy
-sidebar_label: Hyperfy
+sidebar_position: 1
+id: hyperfy-integration
+title: Hyperfy Integration Guide
+sidebar_label: Hyperfy Integration
 ---
 
 # Hyperfy Development
@@ -37,6 +37,6 @@ Our deployment strategy is straightforward:
 - 🔄 Ongoing component development
 - 🔄 Potential upstream contributions
 
-<!-- For specific component documentation and implementation details, see our [components guide](./components/overview). -->
+<!-- For specific component documentation and implementation details, see our future Components Guide. -->
 
-<!-- [components]: /docs/organization/technology/platforms/components/overview -->
+<!-- [components]: /docs/organization/technology/platforms/hyperfy/components/ -->

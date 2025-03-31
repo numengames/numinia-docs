@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-id: platforms-overview
+id: platforms-details
 title: Platforms Overview
 sidebar_label: Overview
 ---
@@ -25,7 +25,7 @@ Hyperfy is our primary development platform, where we maintain both a deployment
 - Contributing improvements back to the main Hyperfy repository
 - Implementing optimizations for large-scale deployments
 
-For detailed deployment information, refer to our [infrastructure documentation](/docs/organization/technology/infrastructure/infrastructure-overview).
+For detailed deployment information, refer to our [Infrastructure documentation](/docs/organization/technology/infrastructure).
 
 ### Oncyber
 
@@ -41,6 +41,6 @@ We continue monitoring platform developments that could enhance our capabilities
 ### Substrata
 Currently in development. We will evaluate its potential for specialized use cases once it becomes available.
 
-For specific platform capabilities and technical details, see our [Supported Platforms](./supported-platforms.md) documentation.
+For specific platform capabilities and technical details, see our [Supported Platforms](./comparison/supported-platforms) documentation.
 
-[hyperfy]: /docs/organization/technology/platforms/hyperfy
+[hyperfy]: /docs/organization/technology/platforms/hyperfy/hyperfy-integration

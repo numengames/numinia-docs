@@ -1,11 +1,11 @@
 ---
-sidebar_position: 6
-id: creating-a-new-app
-title: Creating a New App
-sidebar_label: Creating a New App
+sidebar_position: 1
+id: deploying-new-app
+title: Deploying a New Application
+sidebar_label: Deploying New App
 ---
 
-# Creating a New App guide
+# Deploying a New App guide
 
 This guide details the process of setting up a new application within our infrastructure, using a real-world example based on our Crimson Tower implementation. Our infrastructure is designed to provide a standardized, secure, and scalable environment for deploying applications while maintaining flexibility for different use cases.
 

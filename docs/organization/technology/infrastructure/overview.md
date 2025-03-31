@@ -143,6 +143,6 @@ When working with our infrastructure:
    - Follow change management
 
 For detailed implementation specifics, refer to:
-- [Base Architecture](./base-architecture.md)
-- [Terragrunt Implementation](./terragrunt.md)
-- [Kubernetes Configuration](./kubernetes.md) 
+- [AWS Architecture Overview](./aws/aws-architecture-overview)
+- [Terragrunt Overview](./terragrunt/terragrunt-overview)
+- [Kubernetes Overview](./kubernetes/kubernetes-overview) 

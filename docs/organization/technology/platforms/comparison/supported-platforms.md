@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 id: supported-platforms
-title: Supported Platforms
-sidebar_label: Supported Platforms
+title: Supported 3D Platforms Comparison
+sidebar_label: Platforms Comparison
 ---
 
 # Supported Platforms
@@ -65,6 +65,6 @@ Currently in development phase, with initial infrastructure work in progress:
 - 📋 Documentation preparation
 - 🔄 Performance testing and evaluation
 
-For implementation details of our Hyperfy deployment, refer to our [infrastructure documentation](../infrastructure/infrastructure-overview).
+For implementation details of our Hyperfy deployment, refer to our [Infrastructure documentation](/docs/organization/technology/infrastructure).
 
-[hyperfy]: /docs/organization/technology/platforms/hyperfy
+[hyperfy]: /docs/organization/technology/platforms/hyperfy/hyperfy-integration

@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
-id: base-architecture
-title: Base Architecture
-sidebar_label: Base Architecture
+sidebar_position: 1
+id: aws-architecture-overview
+title: AWS Architecture Overview
+sidebar_label: Architecture Overview
 ---
 
 # Base Architecture
