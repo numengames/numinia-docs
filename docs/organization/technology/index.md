@@ -1,10 +1,3 @@
----
-sidebar_position: 1
-id: technical-overview
-title: Technical Documentation
-sidebar_label: Technical Overview
----
-
 # Technical Overview
 
 Numinia is a comprehensive technology platform that combines artificial intelligence, digital agents, and immersive 3D environments to create powerful interactive experiences. Our architecture integrates multiple cutting-edge technologies to deliver intelligent, scalable, and engaging solutions.
