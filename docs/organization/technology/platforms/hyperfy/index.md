@@ -12,6 +12,7 @@ This section details our implementation and customization of the Hyperfy platfor
 ## Contents
 
 - **[Hyperfy Integration](hyperfy-integration)**: Detailed documentation of our Hyperfy implementation, including platform fork, component development, and deployment strategy.
+- **[Components](components)**: Documentation for our custom Hyperfy components, including usage guides, properties, and examples.
 
 ## Why Hyperfy
 
@@ -38,4 +39,4 @@ We plan to expand this section with additional documentation:
 - Custom Component Development Guide
 - Performance Optimization Strategies
 - Asset Pipeline and Management
-- Integration with Backend Services 
+- Integration with Backend Services

@@ -37,6 +37,4 @@ Our deployment strategy is straightforward:
 - 🔄 Ongoing component development
 - 🔄 Potential upstream contributions
 
-<!-- For specific component documentation and implementation details, see our future Components Guide. -->
-
-<!-- [components]: /docs/organization/technology/platforms/hyperfy/components/ -->
+For specific component documentation and implementation details, see our [Components Guide](components).
