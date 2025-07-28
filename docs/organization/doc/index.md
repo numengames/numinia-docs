@@ -69,4 +69,4 @@ Your change will be pending review
 
 A teammate can approve and merge it into the main branch
 
-<img src="cap_github_5.png" alt= "Create pull request">
+<img src="img/cap_github_5.png" alt= "Create pull request">
