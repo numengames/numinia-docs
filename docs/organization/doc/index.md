@@ -29,7 +29,7 @@ Navigate through the repository to find the file (e.g. reference-components/comp
 
 Click the pencil icon 🖉 in the top right corner to open the editor
 
-🖼️ (Here you can insert a screenshot showing the button)
+<img src="cap_github_0" alt= "Edit image">
 
 2. Make your changes in the text
 Type, paste, or edit anything you need in the text area
@@ -38,7 +38,7 @@ You can use basic Markdown formatting: headings, lists, images, etc.
 
 If you're creating a new file, give it a clear name (e.g. reward-system-hades.md)
 
-🖼️ (Optional screenshot of the editor screen)
+<img src="cap_github_1" alt= "Commit image">
 
 3. Save your changes (commit)
 Scroll down to the “Commit changes” section
@@ -47,11 +47,11 @@ Write a short message describing what you did
 Example: Add visual reference for dash mechanic
 
 Select:
-✅ Create a new branch for this commit and start a pull request
+<img src="cap_github_2" alt= "Commit change">
 
 Click "Propose changes"
 
-🖼️ (Screenshot of this section with the options highlighted)
+<img src="cap_github_3" alt= "Open a pull request">
 
 4. Create the Pull Request
 A new screen will open to create the Pull Request
@@ -60,9 +60,13 @@ Review the title (you can keep it simple) and add a short description if needed
 
 Click “Create pull request”
 
-🖼️ (Screenshot of the final step before submitting the PR)
+<img src="cap_github_7" alt= "Commit message">
+
+<img src="cap_github_6" alt= "Conflics">
 
 5. Done!
 Your change will be pending review
 
 A teammate can approve and merge it into the main branch
+
+<img src="cap_github_5" alt= "Create pull request">
