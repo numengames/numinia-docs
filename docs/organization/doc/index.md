@@ -21,7 +21,7 @@ Each reference entry includes:
 ⚠️ **Disclaimer**: This folder is purely educational and internal. We do not own the rights to any of the referenced material.
 
 
-##✏️ Quick guide to editing this documentation on GitHub (no terminal)
+## ✏️ Quick guide to editing this documentation on GitHub (no terminal)
 This guide explains how to edit .md files directly in GitHub, without using the command line. Perfect for adding new components or fixing existing content.
 
 1. Open the file you want to edit
