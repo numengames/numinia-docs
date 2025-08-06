@@ -7,105 +7,209 @@ sidebar_label: Visibility
 
 # Visibility Component
 
-The Visibility component is designed to control the visibility and collision states of 3D objects in real-time. It supports synchronized visibility changes across all connected clients, configurable delays for smooth transitions, and automatic collision management. The component can listen for custom events to trigger visibility changes and emit completion events for chaining actions. **Important**: This component only handles visibility and collision state management - it does not perform any other actions. You must associate other components or custom logic to trigger the visibility changes and create the desired behaviors.
+The Visibility component allows you to control when 3D objects appear, disappear, or become solid in your scene. Think of it as a smart switch that can show/hide objects and make them solid or pass-through based on events happening in your world. It works across all connected players, so everyone sees the same changes at the same time.
+
+**Important**: This component only handles instant visibility and collision state changes - it does not create visual transitions (like fade effects, scaling, or animations). For smooth visual transitions, you'll need to combine this with animation components or custom effects.
 
 **[Download Component](http://statics.numinia.xyz/hyperfy-components/Visibility-20250703.hyp)**
 
-## Overview
+## What Does It Do?
 
-The VisibilityController component allows you to dynamically control the visibility and collision states of 3D nodes in your scene. It supports both local and synchronized visibility changes, configurable delays for smooth transitions, and automatic collision setup for 3D models. The component acts as a pure state management system - it handles visibility and collision changes, but relies on other components or custom logic to trigger those changes and create the actual behaviors (showing/hiding objects, managing collision states, etc.).
+The Visibility component is like having a remote control for your 3D objects. You can:
+- **Show or hide objects** when something happens (like a player touches a button)
+- **Make objects solid or pass-through** (collision on/off)
+- **Add delays** so changes happen after a wait time (but still instant when they occur)
+- **Sync changes** so all players see the same thing
+- **Chain actions** by triggering other components when visibility changes
 
-### Key Features
-
-- **Dual State Control**: Manage both visibility and collision states independently
-- **Synchronized Changes**: Support for client-server synchronization across all connected players
-- **Configurable Delays**: Add delays before applying visibility changes for smooth transitions
-- **Event-Driven**: Listen for custom events to trigger visibility changes
-- **Automatic Collision**: Automatic collision setup for 3D models with mesh detection
-- **Completion Events**: Emit events when visibility changes are completed for action chaining
-- **Debug System**: Comprehensive logging for troubleshooting visibility and collision issues
+**Important**: This component only handles the showing/hiding and solid/pass-through states. You need other components (like buttons, triggers, or timers) to actually make things happen. The visibility changes are instant - for smooth visual transitions, you'll need animation components.
 
 ## Video Demo
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 20px 0;">
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", maxWidth: "100%", margin: "20px 0"}}>
   <iframe 
     src="https://www.youtube.com/embed/your-video-id" 
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0}} 
     allowfullscreen>
   </iframe>
 </div>
 
-_Watch the Visibility component in action: demonstrating synchronized visibility changes, collision management, and event-driven state control._
+_Watch the Visibility component in action: objects appearing/disappearing, collision changes, and synchronized effects across all players._
 
 ## Properties
 
-### Basic Configuration
+### Basic Settings
 
 | Property       | Type    | Default | Description                                       |
 | -------------- | ------- | ------- | ------------------------------------------------- |
-| `appID`        | string  | `""`    | Unique identifier for this visibility controller  |
-| `nodeName`     | string  | `""`    | The name of the 3D node in your scene to control  |
-| `isDebugMode`  | boolean | `false` | Enable detailed logging for troubleshooting       |
-| `hasCollision` | boolean | `true`  | Forces all meshes to have collision               |
-| `isVisible`    | boolean | `true`  | Initial visibility state when the app starts      |
+| `App ID`       | text    | Auto    | Unique name for this component (auto-generated)   |
+| `Node Name`    | text    | `""`    | **Required**: Name of the 3D object in your scene |
+| `Debug Logs`   | toggle  | `false` | Show detailed information for troubleshooting     |
+| `Add Collision`| toggle  | `true`  | Make the object solid (players can't walk through)|
+| `Start Visible`| toggle  | `true`  | Should the object be visible when the scene loads?|
 
-### Signal Settings
+### Visibility Settings
 
-| Property                           | Type    | Default | Description                                       |
-| ---------------------------------- | ------- | ------- | ------------------------------------------------- |
-| `visibilityControllerIsSync`       | boolean | `false` | Synchronize visibility changes across all clients |
-| `visibilityControllerIsVisible`    | boolean | `true`  | Default visibility state for events               |
-| `visibilityControllerHasCollision` | boolean | `true`  | Default collision state for events                |
-| `visibilityControllerHasDelay`     | boolean | `true`  | Enable delay before applying visibility changes   |
-| `visibilityControllerDelay`        | number  | `0`     | Time in seconds to wait before applying changes   |
-| `visibilityControllerReceiver`     | string  | `"[]"`  | JSON array of event names to listen for          |
-| `visibilityControllerEmitCompleted`| boolean | `true`  | Emit completion event when changes are finished   |
+| Property                    | Type    | Default | Description                                       |
+| --------------------------- | ------- | ------- | ------------------------------------------------- |
+| `Sync Changes`              | toggle  | `false` | Should all players see changes at the same time?  |
+| `Default Visible`           | toggle  | `true`  | Default visibility when events don't specify      |
+| `Default Collision`         | toggle  | `true`  | Default collision when events don't specify       |
+| `Use Delay`                 | toggle  | `false` | Add a wait time before changes happen?            |
+| `Delay (sec)`               | number  | `0`     | How many seconds to wait before instant change (0.1 to 60) |
+| `Emit When Shown`           | toggle  | `false` | Send a signal when object becomes visible?        |
+| `Emit When Hidden`          | toggle  | `false` | Send a signal when object becomes invisible?      |
+| `Accept Any Event`          | toggle  | `false` | Listen to any signal sent to this component?      |
+| `Event Listeners`           | textarea| `[]`    | List of events that trigger visibility changes    |
 
-## Events
+## How Events Work
 
-### Emitted Signals
+The Visibility component listens for "signals" (events) from other components. When it receives a signal, it changes the object's visibility or collision state. The component uses its unique App ID (generated by Hyperfy) to identify itself in the event system.
 
-| Event Name                    | Description                    | Parameters                        |
-| ----------------------------- | ------------------------------ | --------------------------------- |
-| `visibility-completed-{appID}`| Visibility change completed    | `{ playerId, timestamp }`         |
+### Event Format
 
-### Internal Events
+In the `Event Listeners` field, you can specify events like this:
 
-| Event Name      | Description                    | Direction                        |
-| --------------- | ------------------------------ | -------------------------------- |
-| `visibility-sc` | Server to client visibility    | Server → Client                  |
-| `visibility-cs` | Client to server visibility    | Client → Server                  |
+```json
+[
+  {
+    "id": "a1b2c3d4e",
+    "actions": [
+      {
+        "type": "set-visibility",
+        "params": {
+          "isVisible": true,
+          "hasCollision": false,
+          "delay": 1.5
+        }
+      }
+    ]
+  }
+]
+```
+
+**Note**: When referencing this component in events from other components, use the App ID that Hyperfy generated for this component. Also, when duplicating components, be sure you make the app unique, so it has a new AppID
 
 ### Event Parameters
 
-When triggering visibility changes via events, you can pass these parameters:
+When an event triggers a visibility change, you can control:
 
 | Parameter      | Type    | Description                                       |
 | -------------- | ------- | ------------------------------------------------- |
-| `isVisible`    | boolean | Whether the object should be visible              |
-| `hasCollision` | boolean | Whether the object should have collision          |
-| `isSync`       | boolean | Whether to synchronize across all clients         |
-| `delay`        | number  | Delay in seconds before applying the change       |
+| `isVisible`    | boolean | `true` = show object, `false` = hide object      |
+| `hasCollision` | boolean | `true` = solid object, `false` = pass-through    |
+| `isSync`       | boolean | `true` = all players see change, `false` = local only |
+| `delay`        | number  | Seconds to wait before applying the change       |
 
 ## Common Use Cases
 
-The Visibility component is perfect for creating dynamic environments that respond to player actions or game events. Common applications include:
+### 1. **Hidden Doors**
+- Object: A secret door
+- Event: Player solves a puzzle
+- Action: Door instantly becomes visible and solid
 
-- **Dynamic Doors**: Show/hide doors based on player proximity or interaction
-- **Interactive Objects**: Reveal hidden objects when players solve puzzles
-- **Environmental Effects**: Hide/show environmental elements based on time or conditions
-- **Collision Management**: Enable/disable collision for objects based on game state
-- **Synchronized Effects**: Ensure all players see the same visibility changes
+### 2. **Disappearing Platforms**
+- Object: A platform that vanishes
+- Event: Player steps on a trigger
+- Action: Platform instantly becomes invisible and pass-through
 
-## Integration
+### 3. **Synchronized Effects**
+- Object: A treasure chest
+- Event: Any player opens it
+- Action: Chest instantly disappears for all players at the same time
 
-The Visibility component works by listening for custom events and applying visibility/collision changes to 3D nodes. For example, a door emitter might emit a "door-open" signal that the visibility component listens for to hide the door object. The component can also emit completion events that other components can listen for to chain additional actions.
+### 4. **Timed Reveals**
+- Object: A hidden message
+- Event: Timer reaches zero
+- Action: Message instantly appears after a 2-second delay
+
+### 5. **Collision Management**
+- Object: A barrier
+- Event: Player collects a key
+- Action: Barrier instantly becomes pass-through (collision off)
+
+## Step-by-Step Setup
+
+### 1. **Add the Component**
+- Drag the Visibility component into your scene
+- Select the 3D object you want to control
+
+### 2. **Configure Basic Settings**
+- Set the `Node Name` to match your 3D object's name
+- Choose if the object should `Start Visible`
+- Decide if it should `Add Collision` (be solid)
+
+### 3. **Set Up Events**
+- In `Event Listeners`, add the events that should trigger changes
+- Use the JSON format shown above
+- Replace event names with actual events from other components
+
+### 4. **Configure Behavior**
+- Enable `Sync Changes` if all players should see changes
+- Set `Use Delay` and `Delay (sec)` for smooth transitions
+- Enable `Emit When Shown/Hidden` to trigger other components
+
+### 5. **Test Your Setup**
+- Enable `Debug Logs` to see what's happening
+- Trigger your events and watch the object change
+- Check that all players see the same changes
+
+## Tips for Designers
+
+### **Naming Your Objects**
+- Use clear, descriptive names for your 3D objects
+- Avoid spaces and special characters in object names
+- Example: `secret_door_01`, `treasure_chest`, `hidden_platform`
+
+### **Planning Your Events**
+- Think about what should trigger visibility changes
+- Consider timing and delays for smooth experiences
+- Plan for both single-player and multiplayer scenarios
+
+### **Testing Your Setup**
+- Always test with multiple players
+- Use debug logs to troubleshoot issues
+- Test edge cases (what happens if players disconnect?)
+
+### **Performance Considerations**
+- Don't change visibility too frequently
+- Remember that changes are instant - no visual transitions
+- Consider the impact on mobile devices
+
+## Troubleshooting
+
+### **Object Doesn't Change**
+- Check that the `Node Name` matches exactly
+- Verify that your events are being sent
+- Enable `Debug Logs` to see what's happening
+
+### **Changes Not Syncing**
+- Make sure `Sync Changes` is enabled
+- Check that the event includes `"isSync": true`
+- Verify all players are connected
+
+### **Delays Not Working**
+- Ensure `Use Delay` is enabled
+- Check that `Delay (sec)` is greater than 0
+- Verify the delay value in your event parameters
+- Remember: delays only postpone the instant change, they don't create smooth transitions
+
+### **Want Smooth Transitions?**
+- This component only does instant show/hide
+- For fade effects, scale animations, or smooth transitions, you'll need animation components
+
+### **Collision Issues**
+- Check if `Add Collision` is enabled
+- Verify `hasCollision` parameter in events
+- Test with simple objects first
+
 
 ## Best Practices
 
-- Use synchronization for objects that all players should see change simultaneously
-- Implement delays for smooth visual transitions and better user experience
-- Configure collision states appropriately for your game mechanics
-- Use completion events to chain multiple actions together
-- Enable debug mode during development to troubleshoot visibility issues
-- Set appropriate event receivers to avoid unnecessary processing
+- **Start Simple**: Test with basic show/hide before adding complexity
+- **Use Descriptive Names**: Make your object and event names clear
+- **Plan for Multiplayer**: Consider how changes affect all players
+- **Add Delays**: Use delays for smoother, more professional experiences
+- **Test Thoroughly**: Always test with multiple players and scenarios
+- **Use Debug Logs**: Enable debug mode during development
+- **Document Your Setup**: Keep notes on your event configurations

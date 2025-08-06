@@ -11,9 +11,9 @@ This section documents our custom Hyperfy components that extend the platform's 
 
 ## Available Components
 
-- **[Base App Component](base-app)**: Foundational template for creating new Hyperfy applications with node management, collision setup, and debug logging
-- **[Emitter Component](emitter)**: Interactive zones that detect player interactions and emit signals for other components to handle
-- **[Visibility Component](visibility)**: Control visibility and collision states of 3D objects with synchronization and event-driven changes
+- **[Base App Component](./base-app.md)**: Foundational template for creating new Hyperfy applications with node management, collision setup, and debug logging
+- **[Emitter Component](./emitter.md)**: Interactive zones that detect player interactions and emit signals for other components to handle
+- **[Visibility Component](./visibility.md)**: Control visibility and collision states of 3D objects with synchronization and event-driven changes
 
 ## Component Structure
 

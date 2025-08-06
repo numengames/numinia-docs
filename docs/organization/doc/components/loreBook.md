@@ -16,7 +16,7 @@
 
 ## 📽️ Visual Example
 
-![Insert gif here](../media/example-name.gif)  
+<!-- ![Insert gif here](../media/example-name.gif) -->  
 _or link to external video: [Watch on YouTube](https://example.com)_
 
 ---
