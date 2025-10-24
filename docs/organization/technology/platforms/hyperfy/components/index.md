@@ -11,9 +11,31 @@ This section documents our custom Hyperfy components that extend the platform's 
 
 ## Available Components
 
+### Core Animation Components
+
 - **[Base App Component](./base-app.md)**: Foundational template for creating new Hyperfy applications with node management, collision setup, and debug logging
-- **[Emitter Component](./emitter.md)**: Interactive zones that detect player interactions and emit signals for other components to handle
 - **[Visibility Component](./visibility.md)**: Control visibility and collision states of 3D objects with synchronization and event-driven changes
+- **[Rotate Component](./rotate.md)**: Smooth 3D object rotation animations with configurable speed, delays, and event-driven control
+- **[Translate Component](./translate.md)**: Smooth 3D object translation animations with configurable speed, delays, and event-driven control
+
+### Interactive Components
+
+- **[Emitter Component](./emitter.md)**: Interactive zones that detect player interactions and emit signals for other components to handle
+- **[Teleport Component](./teleport.md)**: Flexible teleportation functionality that moves players to specific destinations through events
+- **[Redirect Component](./redirect.md)**: External URL redirection when triggered by events, opening websites in new browser windows/tabs
+- **[Insert Password Component](./insert-password.md)**: Secure password-protected interactions with password input UI and validation
+
+### UI and Communication Components
+
+- **[Dialog Component](./dialog.md)**: Interactive dialog system for character conversations with multiple lines, character names, and auto-advance
+- **[Keyboard Component](./keyboard.md)**: Virtual keyboard interface with letter and number keypads for text input
+- **[Password Manager Component](./password-manager.md)**: Secure password management with input UI, validation, and keyboard integration
+- **[Privacy Policy Component](./privacy-policy.md)**: Clean interface for displaying privacy policy information and legal documents
+
+### System Components
+
+- **[Logs Component](./logs.md)**: Centralized logging system that handles debug messages across all components
+- **[Respawn Component](./respawn.md)**: Intelligent player respawn system that tracks positions and prevents falls into void areas
 
 ## Component Structure
 
