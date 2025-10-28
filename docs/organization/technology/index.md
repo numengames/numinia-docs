@@ -7,10 +7,11 @@ Numinia is a comprehensive technology platform that combines artificial intellig
 Our current infrastructure and platform capabilities include:
 
 ### Cloud Infrastructure
-- **Infrastructure as Code**: Production-ready Terragrunt implementation on AWS
-- **Container Orchestration**: Kubernetes cluster management with EKS
-- **Monitoring**: Prometheus metrics for Kubernetes and CloudWatch for AWS services
-- **Security**: Multi-layer security with VPC, IAM, and RBAC configurations
+- **AWS Services**: VPC networking, EKS compute, S3 storage, CloudFront CDN, RDS databases, Secrets Manager
+- **Infrastructure as Code**: Terragrunt and Terraform for declarative infrastructure management
+- **Container Orchestration**: Kubernetes cluster on EKS with GitOps via Flux CD
+- **Multi-Tenant Architecture**: Isolated organizations with shared infrastructure resources
+- **Monitoring & Security**: Multi-layer security with Prometheus, CloudWatch, and RBAC
 
 ### Platform Integration
 - **Hyperfy Integration**: Complete integration with production-ready deployment
@@ -19,10 +20,10 @@ Our current infrastructure and platform capabilities include:
 - **Asset Delivery**: Optimized content delivery system
 
 ### Core Services
-- **Backend APIs**: Node.js (22.x+) microservices
-- **Data Management**: MongoDB for persistent storage
-- **Authentication**: Secure user and service authentication
-- **Monitoring**: Service health and performance tracking
+- **Backend APIs**: Node.js microservices running on Kubernetes
+- **Data Management**: RDS PostgreSQL for relational data, S3 for static assets
+- **Authentication**: Secure user and service authentication through Secrets Manager
+- **Monitoring**: Service health tracking with Prometheus and CloudWatch
 
 ## Future Roadmap
 
@@ -53,10 +54,17 @@ Our documentation currently covers two main implemented areas:
 ### Infrastructure
 
 The [Infrastructure Guide][infrastructure] covers our production-ready cloud setup:
-- Cloud architecture and AWS implementation
-- Kubernetes configuration
-- Monitoring systems
-- Security protocols
+
+**Core Documentation:**
+- **AWS Services**: Complete overview of VPC, EKS, S3, CloudFront, RDS, Secrets Manager
+- **Infrastructure as Code**: Terragrunt implementation and resource provisioning
+- **Kubernetes Platform**: EKS cluster, Flux GitOps, and multi-tenant architecture
+
+**Practical Guides:**
+- Creating organizations in the multi-tenant platform
+- Deploying applications to Kubernetes
+- Database access patterns with RDS PostgreSQL
+- SSL certificate management with cert-manager
 
 ### Platforms & 3D
 

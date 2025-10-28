@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
-id: s3-cloudfront-implementation
-title: S3 & CloudFront Terragrunt Implementation
-sidebar_label: S3 & CloudFront Implementation
+id: s3-cloudfront-module
+title: S3 & CloudFront Module
+sidebar_label: S3 & CloudFront
 ---
 
 # Static Assets Terragrunt Architecture

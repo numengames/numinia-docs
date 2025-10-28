@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 5
 id: ssl-certificates
 title: SSL Certificate Management
 sidebar_label: SSL Certificates
