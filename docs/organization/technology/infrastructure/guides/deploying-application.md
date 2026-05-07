@@ -136,15 +136,16 @@ The load balancer address is shared across all applications in the cluster. You 
 - **Referencing existing DNS entries**: Check the DNS records already configured for other applications in the same organization — they all point to the same load balancer.
 - **AWS Console**: Go to **EC2 → Load Balancers** and locate the cluster's load balancer to get its DNS name.
 
-### 4.2. Add a DNS record
+### 4.2. Add DNS records
 
-In the organization's external DNS provider (not Route53), add a new record:
+In the organization's external DNS provider (not Route53), add **one record per environment**. Each environment has its own subdomain:
 
-| Field | Value |
-|---|---|
-| Type | `CNAME` |
-| Name | `<app-name>.<org-domain>` |
-| Value | Load balancer DNS name |
+| Environment | Type | Name | Value |
+|---|---|---|---|
+| Pre-production | `CNAME` | `pre.<app-name>.<org-domain>` | Load balancer DNS name |
+| Production | `CNAME` | `<app-name>.<org-domain>` | Load balancer DNS name |
+
+Both records point to the **same** load balancer — environment routing is handled inside the cluster by KNative DomainMapping.
 
 ### 4.3. Wait for DNS propagation
 
@@ -162,14 +163,20 @@ mkdir -p <app-name>/pro
 
 ## Step 6: Create ConfigMap Values
 
-For each environment (pre/pro), create a `configmap-values.yaml` file that defines the application configuration:
+For each environment (pre/pro), create a `configmap-values.yaml` file that defines the application configuration.
+
+> **Naming conventions used below**
+> - `<environment>` is `pre` or `pro` (used in resource names and the AWS Secret name).
+> - `<assets-folder>` is `dev` for pre-production and `latest` for production (used only in the S3 path).
+> - `<k8s-namespace>` is `<org-name>-pre` for pre and `<org-name>` (no suffix) for pro. The same value is used as `serviceAccountName`.
+> - `<hostname>` is `pre.<app-name>.<org-domain>` for pre and `<app-name>.<org-domain>` for pro.
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: <app-name>-<org-name>-<environment>-values
-  namespace: <org-name>-<environment>
+  name: <app-name>-<environment>-values
+  namespace: <k8s-namespace>
   annotations:
     config-version: "1.0.0"
 data:
@@ -178,13 +185,16 @@ data:
     orgName: "<org-name>"
     appName: "<app-name>"
     environment: "<environment>"
-    namespace: <org-name>-<environment>
-    serviceAccountName: "<org-name>-<environment>"
-    world: "<app-name>"
+    namespace: <k8s-namespace>
+    serviceAccountName: "<k8s-namespace>"
+    image:
+      repository: "<image-repository>"
+      tag: "<image-tag>"
+    world: "<environment>-<app-name>"
     publicMaxUploadSize: "2000"
-    publicWsUrl: "wss://<domain>/ws"
-    publicApiUrl: "https://<domain>/api"
-    assetsBaseUrl: "https://statics.numinia.xyz/hyperfy-spaces/<org-name>/<app-name>/<environment>/assets"
+    publicWsUrl: "wss://<hostname>/ws"
+    publicApiUrl: "https://<hostname>/api"
+    assetsBaseUrl: "https://statics.numinia.xyz/hyperfy-spaces/<org-name>/<app-name>/<assets-folder>/assets"
     clean: "true"
     tlsSecretName: "<org-name>-tls"
     resources:
@@ -199,16 +209,18 @@ data:
       maxScale: 1
     domainMapping:
       enabled: true
-      hostname: <domain>
-      namespace: <org-name>-<environment>
+      hostname: <hostname>
+      namespace: <k8s-namespace>
 ```
 
 Key configuration values:
-- **awsSecretName**: Name of the secret in AWS Secrets Manager containing credentials
-- **serviceAccountName**: Service account that provides IAM permissions for AWS resources
-- **assetsBaseUrl**: S3 URL where the application stores assets (for Hyperfy2)
-- **autoscaling**: KNative scale-to-zero configuration (minScale: 0, maxScale: 1)
-- **domainMapping**: KNative domain mapping for automatic routing
+- **awsSecretName**: Name of the secret in AWS Secrets Manager (Step 3). The chart uses this to create an `ExternalSecret` that materializes the secret as a Kubernetes secret consumed by the pod at runtime.
+- **serviceAccountName**: Service account that provides IAM permissions (via IRSA) for accessing AWS Secrets Manager and S3. It is created at the organization level — see [Creating Organization](creating-organization).
+- **image**: Container image for the application. Optional — if omitted, the chart's default is used. To pin a specific image and tag, copy the values from an existing application in the same organization.
+- **world**: Internal Hyperfy2 world identifier. By convention it is prefixed with the environment (`pre-` or `pro-`) so logs and metrics are unambiguous across environments sharing the same database instance.
+- **assetsBaseUrl**: S3 URL where the application reads/writes assets. The folder name (`dev`/`latest`) does **not** match the `<environment>` value (`pre`/`pro`) — keep this mapping in mind.
+- **autoscaling**: KNative scale-to-zero configuration (minScale: 0, maxScale: 1).
+- **domainMapping**: KNative DomainMapping that routes the public hostname to this service.
 
 ## Step 7: Create HelmRelease
 
@@ -219,11 +231,11 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: <app-name>-<environment>
-  namespace: <org-name>-<environment>
+  namespace: <k8s-namespace>
 spec:
   interval: 5m
   releaseName: <app-name>-<environment>
-  targetNamespace: <org-name>-<environment>
+  targetNamespace: <k8s-namespace>
   install:
     remediation:
       retries: 3
@@ -235,15 +247,16 @@ spec:
       chart: ./clusters/prod-cluster/base/hyperfy2-knative
       sourceRef:
         kind: GitRepository
-        name: flux-system-v0.4.7
+        name: flux-system
         namespace: flux-system
       interval: 1m
-      version: "0.4.7"
   valuesFrom:
     - kind: ConfigMap
-      name: <app-name>-<org-name>-<environment>-values
+      name: <app-name>-<environment>-values
       valuesKey: values.yaml
 ```
+
+> **Pinning a chart version**: If an application needs to stay on a specific chart revision (e.g., to avoid picking up changes pushed to the base chart), reference a versioned `GitRepository` (such as `flux-system-v0.4.7`) and add `version: "0.4.7"` under `chart.spec`. By default, omit both fields so the application tracks the live base chart.
 
 This HelmRelease:
 - Uses the `hyperfy2-knative` Helm chart for KNative-based deployments
@@ -265,21 +278,31 @@ resources:
 
 ## Step 9: Register Application in Organization Kustomization
 
-Register the application in the organization's kustomization files for each environment:
+Register the application in the organization's kustomization files for each environment. Each environment has its own kustomization directory at the organization root: `pre-kustomization/` and `pro-kustomization/`. Add a new entry to the `resources` list inside each `kustomization.yaml`.
 
-**For pre-production** (`pre-kustomization.yaml`):
+**For pre-production** (`organizations/<org-name>/pre-kustomization/kustomization.yaml`):
 ```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: <org-name>-pre
 resources:
-  - <app-name>/pre
+  - ../org-config/overlays/pre
+  # ... existing applications ...
+  - ../<app-name>/pre
 ```
 
-**For production** (`pro-kustomization.yaml`):
+**For production** (`organizations/<org-name>/pro-kustomization/kustomization.yaml`):
 ```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: <org-name>
 resources:
-  - <app-name>/pro
+  - ../org-config/overlays/pro
+  # ... existing applications ...
+  - ../<app-name>/pro
 ```
 
-This registration ensures Flux CD picks up and manages your application deployment.
+Resource paths are relative to the kustomization file (hence the `../` prefix). This registration ensures Flux CD picks up and manages your application deployment.
 
 ## Deployment Process
 
@@ -291,8 +314,8 @@ Commit your changes to the repository:
 
 ```bash
 git add organizations/<org-name>/<app-name>
-git add organizations/<org-name>/pre-kustomization.yaml
-git add organizations/<org-name>/pro-kustomization.yaml
+git add organizations/<org-name>/pre-kustomization/kustomization.yaml
+git add organizations/<org-name>/pro-kustomization/kustomization.yaml
 git commit -m "feat: add <app-name> application to <org-name>"
 git push origin main
 ```
@@ -301,20 +324,20 @@ git push origin main
 
 ### 2. Monitor Deployment
 
-Flux CD will automatically detect the changes and deploy the application:
+Flux CD will automatically detect the changes and deploy the application. The commands below use `<k8s-namespace>` — replace it with `<org-name>-pre` for pre-production or `<org-name>` for production:
 
 ```bash
 # Check Helm release status
-flux get helmrelease -n <org-name>-pro
+flux get helmrelease -n <k8s-namespace>
 
 # Check application resources
-kubectl get ksvc,deployment,svc -n <org-name>-pro
+kubectl get ksvc,deployment,svc -n <k8s-namespace>
 
 # Check KNative domain mapping
-kubectl get domainmapping -n <org-name>-pro
+kubectl get domainmapping -n <k8s-namespace>
 
 # View application logs
-kubectl logs -n <org-name>-pro -l serving.knative.dev/service=<app-name>-pro
+kubectl logs -n <k8s-namespace> -l serving.knative.dev/service=<app-name>-<environment>
 ```
 
 Allow a few minutes after merging for the application to be fully operational.
@@ -324,13 +347,14 @@ Allow a few minutes after merging for the application to be fully operational.
 With KNative configured (minScale: 0, maxScale: 1), verify the scaling behavior:
 
 ```bash
-# Check when application scales to zero
-kubectl get pods -n <org-name>-pro -w
+# Check when application scales to zero (idle pods terminate after the
+# Knative scale-down window).
+kubectl get pods -n <k8s-namespace> -w
 
-# Access the application to trigger scale-up
-curl https://<domain>/api
+# Trigger a cold start by opening the application URL in a browser
+# (Hyperfy2 needs a websocket handshake — a plain GET is not enough).
 
-# Watch the pod start automatically (cold start takes a few seconds)
+# Watch the pod start automatically (cold start takes a few seconds).
 ```
 
 ## Serverless Behavior with KNative
@@ -372,14 +396,22 @@ For other applications:
 
 ### Application Not Starting
 
-If the application fails to start:
-1. Check Helm release status: `flux get helmrelease -n <org-name>-pro`
-2. Check KNative Service status: `kubectl describe ksvc <app-name>-pro -n <org-name>-pro`
-3. Review logs: `kubectl logs -n <org-name>-pro -l serving.knative.dev/service=<app-name>-pro`
+If the application fails to start (replace `<k8s-namespace>` with `<org-name>-pre` for pre-production or `<org-name>` for production):
+1. Check Helm release status: `flux get helmrelease -n <k8s-namespace>`
+2. Check KNative Service status: `kubectl describe ksvc <app-name>-<environment> -n <k8s-namespace>`
+3. Review logs: `kubectl logs -n <k8s-namespace> -l serving.knative.dev/service=<app-name>-<environment>`
 4. Identify the failing component, apply the fix, and trigger a reconciliation:
    ```bash
-   flux reconcile helmrelease <app-name>-pro -n <org-name>-pro
+   flux reconcile helmrelease <app-name>-<environment> -n <k8s-namespace>
    ```
+
+### ExternalSecret Not Syncing
+
+If the pod fails to start with errors about missing environment variables, the `ExternalSecret` may not have synced from AWS Secrets Manager:
+1. Check the ExternalSecret status: `kubectl describe externalsecret -n <k8s-namespace>`
+2. Verify the AWS secret name matches `awsSecretName` in the ConfigMap exactly.
+3. Verify the IAM role attached to the service account allows `secretsmanager:GetSecretValue` for that secret ARN — see [Creating Organization](creating-organization).
+4. Force a refresh by annotating the ExternalSecret: `kubectl annotate externalsecret <name> -n <k8s-namespace> force-sync=$(date +%s) --overwrite`
 
 ### Certificate Issues
 
